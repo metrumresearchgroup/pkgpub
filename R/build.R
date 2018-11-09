@@ -57,6 +57,7 @@ build_pkg <- function(.pkg = ".",
             binary = pkgbuild::build(.pkg, binary = TRUE),
             stop(sprintf("cannot build type %s", .t)))
     })
+    setNames(balls, types)
   }, error = function(e) {
     message("building failed", e)
     e
