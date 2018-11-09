@@ -1,4 +1,4 @@
-modify_desc <- function(.d, meta, overwrite = TRUE) {
+modify_desc <- function(.d, meta, loc, overwrite = TRUE) {
   if (!inherits(.d, "description")) {
     stop("must pass a desc object to modify_desc")
   }
@@ -13,7 +13,7 @@ modify_desc <- function(.d, meta, overwrite = TRUE) {
   if (is.na(d__$get("Repository"))) {
     stop("package must have a `Repository` field set", call. = FALSE)
   }
-  d__$write(pkg_desc)
+  d__$write(loc)
   return(fields_set)
 }
 
@@ -34,7 +34,8 @@ build_pkg <- function(.pkg = ".",
                       types = c("source", "binary"),
                        repository = NULL,
                        origin = NULL,
-                       supplement_version = FALSE) {
+                       supplement_version = FALSE,
+                       overwrite = TRUE) {
   pkg_desc <- file.path(.pkg, "DESCRIPTION")
   d__ <- desc::desc(pkg_desc)
   meta <- list(Repository = repository, Origin = origin)
@@ -44,7 +45,7 @@ build_pkg <- function(.pkg = ".",
     hs$Version <- sprintf("%s.%s", version, hs$timestamp)
     meta <- modifyList(meta, hs)
   }
-  modify_desc(d__, drop_nulls(meta))
+  modify_desc(d__, drop_nulls(meta), loc = pkg_desc, overwrite = overwrite)
   on.exit({
     # d__ should be unchanged
     d__$write(pkg_desc)
