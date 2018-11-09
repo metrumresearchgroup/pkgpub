@@ -24,6 +24,7 @@ modify_desc <- function(.d, meta, loc, overwrite = TRUE) {
 #' @param origin package source
 #' @param supplement_version whether to add additional version info (unix timestamp)
 #' @param overwrite overwrite fields already present when adding fields
+#' @param ... parameters to pass to pkgbuild
 #' @details
 #' supplementing version can be done whenever a build occurs that does not
 #' correspond to a formal release/tag. This will automatically add information
@@ -55,8 +56,8 @@ build_pkg <- function(.pkgdir = ".",
     result <- tryCatch({
       tballs <- lapply(types, function(.t) {
         switch(.t,
-               source = pkgbuild::build(.pkgdir),
-               binary = pkgbuild::build(.pkgdir, binary = TRUE),
+               source = pkgbuild::build(.pkgdir, ...),
+               binary = pkgbuild::build(.pkgdir, binary = TRUE, ...),
                stop(sprintf("cannot build type %s", .t)))
       })
       setNames(tballs, types)
