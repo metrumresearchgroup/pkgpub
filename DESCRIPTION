@@ -12,4 +12,7 @@ Authors@R:
            email = "devin.pastoor@gmail.com")
 RoxygenNote: 6.1.0
 Imports: 
-    magrittr
+    magrittr,
+    desc,
+    drat,
+    pkgbuild
