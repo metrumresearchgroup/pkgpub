@@ -5,7 +5,8 @@
 \title{build various versions of a package}
 \usage{
 build_pkg(.pkg = ".", types = c("source", "binary"),
-  repository = NULL, origin = NULL, supplement_version = FALSE)
+  repository = NULL, origin = NULL, supplement_version = FALSE,
+  overwrite = TRUE)
 }
 \arguments{
 \item{.pkg}{path to package}

@@ -2,4 +2,5 @@
 
 export("%>%")
 export(build_pkg)
+export(insert_packages)
 importFrom(magrittr,"%>%")
