@@ -1,9 +1,4 @@
-hashstamp <- function(path) {
-  owd <- getwd()
-  on.exit({
-    setwd(owd)
-  }, add = TRUE)
-  setwd(path)
+hashstamp <- function() {
   metadata <- tryCatch({
     timestamp <- as.numeric(system2("git", args = c("show", "-s", "--format=%ct"), stdout = TRUE))
     hash <- system2("git", args = c("rev-parse", "HEAD"), stdout = TRUE)
