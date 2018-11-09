@@ -1,0 +1,15 @@
+Package: pkgpub
+Type: Package
+Title: Publish Packages
+Version: 0.0.1
+Description: Publish packages to cran-like repos.
+Encoding: UTF-8
+LazyData: true
+Authors@R: 
+    person(given = "Devin",
+           family = "Pastoor",
+           role = c("aut", "cre"),
+           email = "devin.pastoor@gmail.com")
+RoxygenNote: 6.1.0
+Imports: 
+    magrittr
