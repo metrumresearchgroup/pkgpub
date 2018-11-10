@@ -37,7 +37,8 @@ build_pkg <- function(.pkgdir = ".",
                        repository = NULL,
                        origin = NULL,
                        supplement_version = FALSE,
-                       overwrite = TRUE) {
+                       overwrite = TRUE,
+                      ...) {
   withr::with_dir(.pkgdir, {
     pkg_desc <- file.path(.pkgdir, "DESCRIPTION")
     d__ <- desc::desc(pkg_desc)
