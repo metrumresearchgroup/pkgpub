@@ -22,6 +22,7 @@ modify_desc <- function(.d, meta, loc, overwrite = TRUE) {
 #' @param .pkgdir path to package
 #' @param repository repository name being built for
 #' @param origin package source
+#' @param addl_meta additional metadata
 #' @param supplement_version whether to add additional version info (unix timestamp)
 #' @param overwrite overwrite fields already present when adding fields
 #' @param ... parameters to pass to pkgbuild
@@ -36,6 +37,7 @@ build_pkg <- function(.pkgdir = ".",
                       types = c("source", "binary"),
                        repository = NULL,
                        origin = NULL,
+                       addl_meta = NULL,
                        supplement_version = FALSE,
                        overwrite = TRUE,
                       ...) {
@@ -43,6 +45,9 @@ build_pkg <- function(.pkgdir = ".",
     pkg_desc <- file.path(.pkgdir, "DESCRIPTION")
     d__ <- desc::desc(pkg_desc)
     meta <- list(Repository = repository, Origin = origin)
+    if (!is.null(addl_meta)) {
+      meta <- modifyList(meta, addl_meta)
+    }
     if (supplement_version) {
       hs <- hashstamp()
       version <- d__$get_version()
