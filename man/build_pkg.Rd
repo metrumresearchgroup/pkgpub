@@ -4,18 +4,26 @@
 \alias{build_pkg}
 \title{build various versions of a package}
 \usage{
-build_pkg(.pkg = ".", types = c("source", "binary"),
-  repository = NULL, origin = NULL, supplement_version = FALSE,
-  overwrite = TRUE)
+build_pkg(.pkgdir = ".", types = c("source", "binary"),
+  repository = NULL, origin = NULL, addl_meta = NULL,
+  supplement_version = FALSE, overwrite = TRUE, ...)
 }
 \arguments{
-\item{.pkg}{path to package}
+\item{.pkgdir}{path to package}
+
+\item{types}{types of package to build}
 
 \item{repository}{repository name being built for}
 
 \item{origin}{package source}
 
+\item{addl_meta}{additional metadata}
+
 \item{supplement_version}{whether to add additional version info (unix timestamp)}
+
+\item{overwrite}{overwrite fields already present when adding fields}
+
+\item{...}{parameters to pass to pkgbuild}
 }
 \description{
 build various versions of a package

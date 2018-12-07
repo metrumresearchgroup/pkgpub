@@ -20,6 +20,7 @@ modify_desc <- function(.d, meta, loc, overwrite = TRUE) {
 
 #' build various versions of a package
 #' @param .pkgdir path to package
+#' @param types types of package to build
 #' @param repository repository name being built for
 #' @param origin package source
 #' @param addl_meta additional metadata
@@ -32,6 +33,8 @@ modify_desc <- function(.d, meta, loc, overwrite = TRUE) {
 #' about the git hash (if available), as well as incrememnt the version number
 #' with a unix timestamp that corresponds to the last git hash (if present) or
 #' the current system time, if git is not present.
+#' @importFrom stats setNames
+#' @importFrom utils modifyList
 #' @export
 build_pkg <- function(.pkgdir = ".",
                       types = c("source", "binary"),
