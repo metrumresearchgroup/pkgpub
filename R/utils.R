@@ -17,3 +17,7 @@ if_error <- function(.x, when_error = NULL) {
   }
   return(.x)
 }
+
+TODO <- function(.msg) {
+  stop("TODO: ", .msg)
+}
