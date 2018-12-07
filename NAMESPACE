@@ -2,5 +2,9 @@
 
 export("%>%")
 export(build_pkg)
+export(git_url)
+export(head_tag)
 export(insert_packages)
 importFrom(magrittr,"%>%")
+importFrom(stats,setNames)
+importFrom(utils,modifyList)
