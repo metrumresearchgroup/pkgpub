@@ -19,7 +19,9 @@ build_pkg(.pkgdir = ".", types = c("source", "binary"),
 
 \item{addl_meta}{additional metadata}
 
-\item{supplement_version}{whether to add additional version info (unix timestamp)}
+\item{supplement_version}{add additional version info (unix timestamp) to version.
+TRUE inspects the pkg folder as a git repo, also may provide a character or numeric
+value to append}
 
 \item{overwrite}{overwrite fields already present when adding fields}
 
@@ -33,5 +35,5 @@ supplementing version can be done whenever a build occurs that does not
 correspond to a formal release/tag. This will automatically add information
 about the git hash (if available), as well as incrememnt the version number
 with a unix timestamp that corresponds to the last git hash (if present) or
-the current system time, if git is not present.
+the current system time, if git is not present and no version timestamp is provided.
 }
