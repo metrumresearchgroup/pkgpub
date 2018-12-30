@@ -59,7 +59,7 @@ build_pkg <- function(.pkgdir = ".",
         timestamp = as.integer(supplement_version),
         Version = sprintf("%s.%s", version, supplement_version)
       )
-      meta <- modifyList(meta, hs)
+      meta <- modifyList(meta, sv)
     } else if (supplement_version) {
       hs <- hashstamp()
       version <- d__$get_version()
