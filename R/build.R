@@ -24,7 +24,9 @@ modify_desc <- function(.d, meta, loc, overwrite = TRUE) {
 #' @param repository repository name being built for
 #' @param origin package source
 #' @param addl_meta additional metadata
-#' @param supplement_version whether to add additional version info (unix timestamp)
+#' @param supplement_version add additional version info (unix timestamp) to version.
+#' TRUE inspects the pkg folder as a git repo, also may provide a character or numeric
+#' value to append
 #' @param overwrite overwrite fields already present when adding fields
 #' @param ... parameters to pass to pkgbuild
 #' @details
@@ -32,7 +34,7 @@ modify_desc <- function(.d, meta, loc, overwrite = TRUE) {
 #' correspond to a formal release/tag. This will automatically add information
 #' about the git hash (if available), as well as incrememnt the version number
 #' with a unix timestamp that corresponds to the last git hash (if present) or
-#' the current system time, if git is not present.
+#' the current system time, if git is not present and no version timestamp is provided.
 #' @importFrom stats setNames
 #' @importFrom utils modifyList
 #' @export
@@ -51,7 +53,14 @@ build_pkg <- function(.pkgdir = ".",
     if (!is.null(addl_meta)) {
       meta <- modifyList(meta, addl_meta)
     }
-    if (supplement_version) {
+    if (is.numeric(supplement_version) || is.character(supplement_version)) {
+      version <- d__$get_version()
+      sv <- list(
+        timestamp = as.integer(supplement_version),
+        Version = sprintf("%s.%s", version, supplement_version)
+      )
+      meta <- modifyList(meta, sv)
+    } else if (supplement_version) {
       hs <- hashstamp()
       version <- d__$get_version()
       hs$Version <- sprintf("%s.%s", version, hs$timestamp)
