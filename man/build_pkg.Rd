@@ -4,18 +4,28 @@
 \alias{build_pkg}
 \title{build various versions of a package}
 \usage{
-build_pkg(.pkg = ".", types = c("source", "binary"),
-  repository = NULL, origin = NULL, supplement_version = FALSE,
-  overwrite = TRUE)
+build_pkg(.pkgdir = ".", types = c("source", "binary"),
+  repository = NULL, origin = NULL, addl_meta = NULL,
+  supplement_version = FALSE, overwrite = TRUE, ...)
 }
 \arguments{
-\item{.pkg}{path to package}
+\item{.pkgdir}{path to package}
+
+\item{types}{types of package to build}
 
 \item{repository}{repository name being built for}
 
 \item{origin}{package source}
 
-\item{supplement_version}{whether to add additional version info (unix timestamp)}
+\item{addl_meta}{additional metadata}
+
+\item{supplement_version}{add additional version info (unix timestamp) to version.
+TRUE inspects the pkg folder as a git repo, also may provide a character or numeric
+value to append}
+
+\item{overwrite}{overwrite fields already present when adding fields}
+
+\item{...}{parameters to pass to pkgbuild}
 }
 \description{
 build various versions of a package
@@ -25,5 +35,5 @@ supplementing version can be done whenever a build occurs that does not
 correspond to a formal release/tag. This will automatically add information
 about the git hash (if available), as well as incrememnt the version number
 with a unix timestamp that corresponds to the last git hash (if present) or
-the current system time, if git is not present.
+the current system time, if git is not present and no version timestamp is provided.
 }
