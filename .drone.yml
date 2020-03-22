@@ -10,13 +10,13 @@ steps:
     path: /var/run/docker.sock
   commands:
   - $(aws ecr get-login --no-include-email --region us-east-1)
-  - docker pull 906087756158.dkr.ecr.us-east-1.amazonaws.com/mpn:2020-01-29
+  - docker pull 906087756158.dkr.ecr.us-east-1.amazonaws.com/mpn:2020-03-07
 
 - name: R36
-  image: "906087756158.dkr.ecr.us-east-1.amazonaws.com/mpn:2020-01-29"
+  image: "906087756158.dkr.ecr.us-east-1.amazonaws.com/mpn:2020-03-07"
   pull: never
   environment:
-    R_LIBS_USER: "/opt/rpkgs/3.6/2020-01-29"
+    R_LIBS_USER: "/opt/rpkgs/3.6/2020-03-07"
   commands:
   - /opt/R/3.6.2/bin/R -e "devtools::install_deps(upgrade = 'never')"
   - /opt/R/3.6.2/bin/R -e "devtools::test()"
@@ -24,38 +24,30 @@ steps:
 
 
 - name: R35
-  image: "906087756158.dkr.ecr.us-east-1.amazonaws.com/mpn:2020-01-29"
+  image: "906087756158.dkr.ecr.us-east-1.amazonaws.com/mpn:2020-03-07"
   pull: never
   environment:
-    R_LIBS_USER: "/opt/rpkgs/3.5/2020-01-29"
+    R_LIBS_USER: "/opt/rpkgs/3.5/2020-03-07"
   commands:
   - /opt/R/3.5.3/bin/R -e "devtools::install_deps(upgrade = 'never')"
   - /opt/R/3.5.3/bin/R -e "devtools::test()"
   - /opt/R/3.5.3/bin/R -e "devtools::check()"
+- name: release
+  when:
+    event:
+    - tag
+    status:
+    - success
+  image: "906087756158.dkr.ecr.us-east-1.amazonaws.com/mpn:2020-03-07"
+  pull: never
+  commands:
+  - git config --global user.email "drone@metrumrg.com"
+  - git config --global user.name "Drony"
+  - git fetch --tags
+  - R -e "pkgpub::create_tagged_repo()"
+  - aws s3 cp /tmp/${DRONE_TAG} s3://mpn.metworx.dev/releases/${DRONE_REPO_NAME}/${DRONE_TAG}
 
 volumes:
 - name: docker.sock
   host:
     path: /var/run/docker.sock
-
-
----
-  name: tagged releases
-  kind: pipeline
-  type: docker
-  steps:
-    - name: releaser
-      image: "906087756158.dkr.ecr.us-east-1.amazonaws.com/mpn:2020-01-29"
-      pull: never
-      commands:
-        - git config --global user.email "drone@metrumrg.com"
-        - git config --global user.name "Drony"
-        - git fetch --tags
-        - R -e "install.packages('pkgpub', repo = c('https://s3.amazonaws.com/mpn.metworx.dev/releases/pkgpub/0.1.0.9001', getOption('repos')))"
-        - R -e "pkgpub::create_tagged_repo()"
-        - aws s3 cp /tmp/${DRONE_TAG} s3://mpn.metworx.dev/releases/${DRONE_REPO_NAME}/${DRONE_TAG}
-  trigger:
-    event:
-      - tag
-    status:
-      - success
