@@ -20,5 +20,5 @@ tag_version <- function(.dir = getwd(), .dirty = FALSE, .fetch = TRUE) {
   if (nrow(tag_list) && pkg_version %in% tag_list$name) {
     stop("tag already exists in repo",call. = FALSE)
   }
-  gert::git_tag_create(pkg_version, message = NULL)
+  gert::git_tag_create(pkg_version, message = sprintf("release v%s", pkg_version))
 }
