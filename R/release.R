@@ -15,7 +15,12 @@ create_tagged_repo <- function(.dir = "/tmp") {
 
   repo_dir <- new_cranlike_repo(file.path(.dir, ctag))
 
-  built_dir <- build_pkg(.pkgdir = ".", types = "source", origin = sanitize_git_url(git_url()), repository = "MPNDEV", addl_meta = list(git_tag = ctag), supplement_version = FALSE)
+  built_dir <- build_pkg(.pkgdir = ".",
+                         types = "source",
+                         origin = sanitize_git_url(git_url()),
+                         repository = "MPNDEV",
+                         addl_meta = list(git_tag = ctag, git_commit = gert::git_info()$commit),
+                         supplement_version = FALSE)
 
   res <- insert_packages(unlist(built_dir), repo_dir)
   if (!isTRUE(res)) {
