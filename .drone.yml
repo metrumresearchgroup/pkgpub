@@ -51,7 +51,7 @@ volumes:
         - git config --global user.email "drone@metrumrg.com"
         - git config --global user.name "Drony"
         - git fetch --tags
-        - R -e "install.packages('pkgpub', repo = 'https://s3.amazonaws.com/mpn.metworx.dev/releases/pkgpub/0.1.0.9001')"
+        - R -e "install.packages('pkgpub', repo = c('https://s3.amazonaws.com/mpn.metworx.dev/releases/pkgpub/0.1.0.9001', getOption('repos')))"
         - R -e "pkgpub::create_tagged_repo()"
         - aws s3 cp /tmp/${DRONE_TAG} s3://mpn.metworx.dev/releases/${DRONE_REPO_NAME}/${DRONE_TAG}
   trigger:
