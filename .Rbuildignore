@@ -1,4 +1,5 @@
 ^LICENSE\.md$
+^\.drone\.yml$
 ^README\.Rmd$
 ^.*\.Rproj$
 ^\.Rproj\.user$
