@@ -22,15 +22,6 @@ sanitize_git_url <- function(.x) {
 }
 
 current_commit_tag <- function() {
-  tags <- gert::git_tag_list()
-  # no tags in repo period
-  if (!nrow(tags)) {
-    return(NULL)
-  }
-  ginfo <- gert::git_info()
-  tag_df <- tags[tags$commit == ginfo$commit, , drop = FALSE]
-  if (!nrow(tag_df)) {
-    return(NULL)
-  }
-  return(tag_df$name)
+  tag <- GIT("tag", "--points-at", "HEAD")
+  return(tag)
 }
