@@ -4,7 +4,7 @@
 \alias{tag_version}
 \title{add a git tag based on the pkg version}
 \usage{
-tag_version(.dir = getwd(), .dirty = FALSE, .fetch = TRUE)
+tag_version(.dir = getwd(), .dirty = FALSE, .fetch = TRUE, .push = TRUE)
 }
 \arguments{
 \item{.dir}{dir of repo}
@@ -12,6 +12,8 @@ tag_version(.dir = getwd(), .dirty = FALSE, .fetch = TRUE)
 \item{.dirty}{whether to tag given the repo is in a dirty state}
 
 \item{.fetch}{run a git fetch first to get tags}
+
+\item{.push}{push created tag}
 }
 \description{
 add a git tag based on the pkg version

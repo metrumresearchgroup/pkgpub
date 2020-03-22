@@ -2,8 +2,9 @@
 #' @param .dir dir of repo
 #' @param .dirty whether to tag given the repo is in a dirty state
 #' @param .fetch run a git fetch first to get tags
+#' @param .push push created tag
 #' @export
-tag_version <- function(.dir = getwd(), .dirty = FALSE, .fetch = TRUE) {
+tag_version <- function(.dir = getwd(), .dirty = FALSE, .fetch = TRUE, .push = TRUE) {
   if (.fetch) {
     gert::git_fetch(verbose = FALSE)
 
@@ -21,4 +22,7 @@ tag_version <- function(.dir = getwd(), .dirty = FALSE, .fetch = TRUE) {
     stop("tag already exists in repo",call. = FALSE)
   }
   gert::git_tag_create(pkg_version, message = sprintf("release v%s", pkg_version))
+  if (.push) {
+    gert::git_tag_push(pkg_version)
+  }
 }
