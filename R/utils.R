@@ -12,7 +12,7 @@ sh <- function(cmd, args, stdout = TRUE, ...) {
 }
 
 if_error <- function(.x, when_error = NULL) {
-  if (inherits("simpleError", .x)) {
+  if (inherits(.x, "simpleError")) {
     return(when_error)
   }
   return(.x)
