@@ -2,9 +2,11 @@
 
 export("%>%")
 export(build_pkg)
+export(create_tagged_repo)
 export(git_url)
 export(head_tag)
 export(insert_packages)
+export(new_cranlike_repo)
 importFrom(magrittr,"%>%")
 importFrom(stats,setNames)
 importFrom(utils,modifyList)

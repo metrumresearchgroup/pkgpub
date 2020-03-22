@@ -4,9 +4,16 @@
 \alias{build_pkg}
 \title{build various versions of a package}
 \usage{
-build_pkg(.pkgdir = ".", types = c("source", "binary"),
-  repository = NULL, origin = NULL, addl_meta = NULL,
-  supplement_version = FALSE, overwrite = TRUE, ...)
+build_pkg(
+  .pkgdir = ".",
+  types = c("source", "binary"),
+  repository = NULL,
+  origin = NULL,
+  addl_meta = NULL,
+  supplement_version = FALSE,
+  overwrite = TRUE,
+  ...
+)
 }
 \arguments{
 \item{.pkgdir}{path to package}

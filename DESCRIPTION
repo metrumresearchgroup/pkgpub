@@ -1,7 +1,7 @@
 Package: pkgpub
 Type: Package
 Title: Publish Packages
-Version: 0.1.0
+Version: 0.1.0.9000
 Description: Publish packages to cran-like repos.
 Encoding: UTF-8
 LazyData: true
@@ -10,11 +10,12 @@ Authors@R:
            family = "Pastoor",
            role = c("aut", "cre"),
            email = "devin.pastoor@gmail.com")
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Imports: 
     magrittr,
     desc,
     drat,
     pkgbuild,
-    withr
+    withr,
+    gert
 License: MIT + file LICENSE
