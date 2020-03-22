@@ -5,18 +5,20 @@
 #' @export
 tag_version <- function(.dir = getwd(), .dirty = FALSE, .fetch = TRUE) {
   if (.fetch) {
-    gert::git_fetch()
+    gert::git_fetch(verbose = FALSE)
+
   }
   pkg_version <- as.data.frame(read.dcf(file.path(.dir,"DESCRIPTION"),fields = "Version"))$Version
   status <- gert::git_status()
   if (nrow(status) && !.dirty) {
     stop("not tagging as currently detected the following dirty files: ",
-         glue::glue_collapse(status$file)
+         glue::glue_collapse(status$file),
+         call. = FALSE
     )
   }
   tag_list <- gert::git_tag_list()
   if (nrow(tag_list) && pkg_version %in% tag_list$name) {
-    stop("tag already exists in repo")
+    stop("tag already exists in repo",call. = FALSE)
   }
-  gert::git_tag_create(pkg_version)
+  gert::git_tag_create(pkg_version, message = NULL)
 }
