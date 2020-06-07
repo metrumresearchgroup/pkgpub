@@ -1,7 +1,7 @@
 Package: pkgpub
 Type: Package
 Title: Publish Packages
-Version: 0.2.0
+Version: 0.3.0
 Description: Publish packages to cran-like repos.
 Encoding: UTF-8
 LazyData: true
@@ -10,7 +10,7 @@ Authors@R:
            family = "Pastoor",
            role = c("aut", "cre"),
            email = "devin.pastoor@gmail.com")
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Imports: 
     magrittr,
     desc,
