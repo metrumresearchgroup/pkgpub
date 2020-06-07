@@ -11,7 +11,7 @@ skip_remaining_drone_ci_steps <- function() {
 #' @export
 skip_remaining_if_dev_tag <- function() {
   if (is_dev_tag()) {
-    skip_remaining_ci_steps()
+    skip_remaining_drone_ci_steps()
   }
   exit_with_statuscode(0)
 }
