@@ -8,5 +8,5 @@
 ## Installation
 
 ``` r
-install.packages("pkgpub", repo = "https://metrumresearchgroup.github.io/rpkgs/gh_dev")
+install.packages("pkgpub", repos = c("https://s3.amazonaws.com/mpn.metworx.dev/releases/pkgpub/0.2.0", getOption('repos')))
 ```
