@@ -23,5 +23,9 @@ sanitize_git_url <- function(.x) {
 
 current_commit_tag <- function() {
   tag <- GIT("tag", "--points-at", "HEAD")
+  if (length(tag) > 1) {
+    message('detected more than one tag, removing possible `latest` before proceeding')
+    tag <- tag[tag != "latest"]
+  }
   return(tag)
 }
